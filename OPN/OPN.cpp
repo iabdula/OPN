@@ -2,6 +2,7 @@
 #include <fstream>
 #include <conio.h>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -15,32 +16,64 @@ int main() {
         return 1;
     }
 
+    vector<vector<string>> pages;
+    vector<string> currentPage;
+
     while (getline(file, line)) {
         if (line == "#PAGE_END") {
-            cout << "\n--- Конец страницы ---\nНажмите стрелку вправо, чтобы продолжить..." << endl;
-
-            int key = _getch();
-            if (key == 224) { // спец. код клавиши
-                int arrow = _getch();
-                if (arrow == 77) { // 77 — стрелка вправо
-                    cout << "\nПереход к следующей странице...\n" << endl;
-                    system("cls");
-                    continue;
-                }
-                else {
-                    cout << "\nНажата не та стрелка. Завершаем.\n";
-                    break;
-                }
-            }
-            else {
-                cout << "\nНажата не стрелка. Завершаем.\n";
-                break;
-            }
+            pages.push_back(currentPage);
+            currentPage.clear();
         }
-
-        cout << line << endl;
+        else {
+            currentPage.push_back(line);
+        }
     }
 
     file.close();
+
+    int pageIndex = 0;
+    while (true) {
+        system("cls");
+
+        cout << "Страница " << (pageIndex + 1) << " из " << pages.size() << ":\n\n";
+        for (const string& l : pages[pageIndex]) {
+            cout << l << endl;
+        }
+
+        cout << "\n--- Конец страницы ---\n";
+        cout << "Нажмите стрелку вправо для следующей, влево — для предыдущей. Любая другая — выход.\n";
+
+        int key = _getch();
+        if (key == 224) {
+            int arrow = _getch();
+            if (arrow == 77) { // вправо
+                if (pageIndex < pages.size() - 1) {
+                    pageIndex++;
+                }
+                else {
+                    cout << "\nЭто последняя страница.\n";
+                    _getch();
+                }
+            }
+            else if (arrow == 75) { // влево
+                if (pageIndex > 0) {
+                    pageIndex--;
+                }
+                else {
+                    cout << "\nЭто первая страница.\n";
+                    _getch();
+                }
+            }
+            else {
+                cout << "\nНажата не та стрелка. Завершаем.\n";
+                break;
+            }
+        }
+        else {
+            cout << "\nНажата не стрелка. Завершаем.\n";
+            break;
+        }
+    }
+
     return 0;
 }
