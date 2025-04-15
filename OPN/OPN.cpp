@@ -5,6 +5,16 @@
 #include <vector>
 
 using namespace std;
+int GetPageNumber(int totalPages) {
+    int number;
+    cout << "\nВведите номер страницы (1 - " << totalPages << "): ";
+    while (!(cin >> number) || number < 1 || number > totalPages) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Некорректный ввод. Повторите: ";
+    }
+    return number - 1; // Потому что индексация с нуля
+}
 
 int main() {
     setlocale(LC_ALL, "Ru");
@@ -41,7 +51,7 @@ int main() {
         }
 
         cout << "\n--- Конец страницы ---\n";
-        cout << "Нажмите стрелку вправо для следующей, влево — для предыдущей. Любая другая — выход.\n";
+        cout << "Нажмите стрелку вправо для следующей, влево — для предыдущей, G или g для выбора страницы. Любая другая — выход.\n";
 
         int key = _getch();
         if (key == 224) {
@@ -68,6 +78,11 @@ int main() {
                 cout << "\nНажата не та стрелка. Завершаем.\n";
                 break;
             }
+        }
+        else if (key == 'g' || key == 'G') {
+            cout << "\nПереход к странице:\n";
+            int newIndex = GetPageNumber(pages.size()); // Запрашиваем номер страницы
+            pageIndex = newIndex; // Переходим на указанную страницу
         }
         else {
             cout << "\nНажата не стрелка. Завершаем.\n";
