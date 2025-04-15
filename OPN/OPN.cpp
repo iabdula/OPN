@@ -23,7 +23,7 @@ int main() {
 
     if (!file.is_open()) {
         cerr << "Не удалось открыть файл!" << endl;
-        return 1;
+        return 0;
     }
 
     vector<vector<string>> pages;
@@ -41,8 +41,10 @@ int main() {
 
     file.close();
 
+
+
     int pageIndex = 0;
-    while (true) {
+    while (pageIndex < pages.size()) {
         system("cls");
 
         cout << "Страница " << (pageIndex + 1) << " из " << pages.size() << ":\n\n";
@@ -90,5 +92,6 @@ int main() {
         }
     }
 
+    system("pause > NULL");
     return 0;
 }
