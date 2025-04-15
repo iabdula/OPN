@@ -4,9 +4,30 @@
 #include <string>//для работы с текстовыми строками (поддержка класса string)
 #include <vector>//для хранения строк по страницам 
 #include <windows.h> // чоб сделать консоль красивой
-
+#include <sstream> //
 
 using namespace std;
+
+int EvaluateRPN(string expr) {
+    vector<int> stack;
+    stringstream ss(expr);
+    string token;
+
+    while (ss >> token) {
+        if (token == "+" || token == "-" || token == "*" || token == "/") {
+            int b = stack.back(); stack.pop_back();
+            int a = stack.back(); stack.pop_back();
+            if (token == "+") stack.push_back(a + b);
+            if (token == "-") stack.push_back(a - b);
+            if (token == "*") stack.push_back(a * b);
+            if (token == "/") stack.push_back(a / b);
+        }
+        else {
+            stack.push_back(stoi(token));  // добавляем число в стек
+        }
+    }
+    return stack.back(); // результат в последнем элементе стека
+}
 
 int GetPageNumber(int totalPages) {// это для того чтоб искать страницу с помощью g G
     int number;
@@ -27,6 +48,33 @@ int GetConsoleHeight() {//Без этой функции текст всегда
     }
     return rows;
 }
+void RunRPNTest() {
+    vector<string> expressions = { "3 4 +", "5 1 2 + 4 * + 3 -", "7 2 3 * -" };
+    int score = 0;
+
+    for (int i = 0; i < expressions.size(); i++) {
+        system("cls");
+        cout << "Введите результат выражения: " << expressions[i] << endl;
+        int userAnswer;
+        cin >> userAnswer;
+        int correctAnswer = EvaluateRPN(expressions[i]);
+
+        if (userAnswer == correctAnswer) {
+            cout << "Верно!" << endl;
+            score++;
+        }
+        else {
+            cout << "Неверно! Правильный ответ: " << correctAnswer << endl;
+        }
+        cout << "Нажмите любую клавишу для продолжения...\n";
+        _getch();
+    }
+
+    cout << "\nВы набрали " << score << " из " << expressions.size() << endl;
+    cout << "Конец теста.Примите поздравления от Абдулы и Али" << endl;
+    _getch();
+}
+
 
 
 int main() {
@@ -84,6 +132,7 @@ int main() {
                     system("cls");
                     cout << "\nВы просмотрели все страницы. Перейдём к практике!\n";
                     _getch();
+                    RunRPNTest(); // ← Вот это новая строка
                     break;
                 }
             }
@@ -104,8 +153,8 @@ int main() {
         }
         else if (key == 'g' || key == 'G') {
             cout << "\nПереход к странице:\n";
-            int newIndex = GetPageNumber(pages.size()); // Запрашиваем номер страницы
-            pageIndex = newIndex; // Переходим на указанную страницу
+            int newIndex = GetPageNumber(pages.size()); //  номер страницы
+            pageIndex = newIndex; // Переход на указанную страницу
         }
         else {
             cout << "\nНажата не стрелка. Завершаем.\n";
