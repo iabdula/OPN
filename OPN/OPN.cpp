@@ -1,12 +1,13 @@
-﻿#include <iostream>
-#include <fstream>
-#include <conio.h>
-#include <string>
-#include <vector>
+﻿#include <iostream>// база
+#include <fstream>//работать с файлами ifstream
+#include <conio.h>//для стрелочек переключения (_getch)
+#include <string>//для работы с текстовыми строками (поддержка класса string)
+#include <vector>//для хранения строк по страницам 
 #include <windows.h> // чоб сделать консоль красивой
 
 
 using namespace std;
+
 int GetPageNumber(int totalPages) {// это для того чтоб искать страницу с помощью g G
     int number;
     cout << "\nВведите номер страницы (1 - " << totalPages << "): ";
@@ -17,6 +18,7 @@ int GetPageNumber(int totalPages) {// это для того чтоб искат
     }
     return number - 1; // Потому что индексация с нуля
 }
+//относится к #include <windows.h>
 int GetConsoleHeight() {//Без этой функции текст всегда будет начинаться с самого верха а с ней  аккуратно по центру
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     int rows = 25; // дефолт как будто
@@ -24,7 +26,7 @@ int GetConsoleHeight() {//Без этой функции текст всегда
         rows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
     }
     return rows;
-}//относится к #include <windows.h>
+}
 
 
 int main() {
