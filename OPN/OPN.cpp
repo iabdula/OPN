@@ -9,7 +9,7 @@
 using namespace std;
 
 //практика
-void ПоказатьПрактику() {
+void praktika() {
     system("cls");
     cout << "Практика по обратной польской нотации\n\n";
 
@@ -66,7 +66,7 @@ void ПоказатьПрактику() {
 
 }
 
-int EvaluateRPN(string expr) {
+int OPN(string expr) {
     vector<int> stack;
     stringstream ss(expr);
     string token;
@@ -87,7 +87,7 @@ int EvaluateRPN(string expr) {
     return stack.back(); // результат в последнем элементе стека
 }
 
-int GetPageNumber(int totalPages) {// это для того чтоб искать страницу с помощью g G
+int search(int totalPages) {// это для того чтоб искать страницу с помощью g G
     int number;
     cout << "\nВведите номер страницы (1 - " << totalPages << "): ";
     while (!(cin >> number) || number < 1 || number > totalPages) {
@@ -98,7 +98,7 @@ int GetPageNumber(int totalPages) {// это для того чтоб искат
     return number - 1; // Потому что индексация с нуля
 }
 //относится к #include <windows.h>
-int GetConsoleHeight() {//Без этой функции текст всегда будет начинаться с самого верха а с ней  аккуратно по центру
+int center() {//Без этой функции текст всегда будет начинаться с самого верха а с ней  аккуратно по центру
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     int rows = 25; // дефолт как будто
     if (GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi)) {
@@ -106,7 +106,7 @@ int GetConsoleHeight() {//Без этой функции текст всегда
     }
     return rows;
 }
-void RunRPNTest() {
+void Test() {
     vector<string> expressions = { "3 4 +", "5 1 2 + 4 * + 3 -", "7 2 3 * -" };
     int score = 0;
 
@@ -115,7 +115,7 @@ void RunRPNTest() {
         cout << "Введите результат выражения: " << expressions[i] << endl;
         int userAnswer;
         cin >> userAnswer;
-        int correctAnswer = EvaluateRPN(expressions[i]);
+        int correctAnswer = OPN(expressions[i]);
 
         if (userAnswer == correctAnswer) {
             cout << "Верно!" << endl;
@@ -166,7 +166,7 @@ int main() {
     int pageIndex = 0;
     while (pageIndex < pages.size()) {
         system("cls");
-        int consoleHeight = GetConsoleHeight();
+        int consoleHeight = center();
         int contentHeight = pages[pageIndex].size() + 5; // +5  для заголовка и опускания
         int topPadding = (consoleHeight - contentHeight) / 2;
 
@@ -188,17 +188,17 @@ int main() {
                     pageIndex++;
                 }
                 else {
-                    system("cls");
                     cout << "\nВы просмотрели все страницы. Перейдём к практике!\n";
                     _getch();
-                    ПоказатьПрактику();
+                    praktika();
+                    system("cls");
                     cout << "\nЭто была практика по ОПН. Нажмите любую клавишу, чтобы продолжить...";
                     _getch();
 
                     cout << "\nТеперь попробуем пройти небольшой тест!\n";
                     _getch();
 
-                    RunRPNTest();
+                    Test();
                     break;
                 }
             }
@@ -218,7 +218,7 @@ int main() {
         }
         else if (key == 'g' || key == 'G') {
             cout << "\nПереход к странице:\n";
-            int newIndex = GetPageNumber(pages.size()); //  номер страницы
+            int newIndex = search(pages.size()); //  номер страницы
             pageIndex = newIndex; // Переход на указанную страницу
         }
         else {
@@ -230,3 +230,4 @@ int main() {
     system("pause > NULL");
     return 0;
 }
+//ваня ничего не сделал
