@@ -15,8 +15,8 @@ void praktika() {
 
     // Первая практика
     cout << "Пример 1\n";
-    string выражение1 = "8 5 - 2 3 + *";
-    cout << "ОПН: " << выражение1 << "\n";
+    string exp1 = "8 5 - 2 3 + *";
+    cout << "ОПН: " << exp1 << "\n";
     cout << "Что означает: (8 − 5) × (2 + 3)\n\n";
 
     cout << "Решение:\n";
@@ -32,8 +32,8 @@ void praktika() {
 
     // Вторая практика
     cout << "Пример 2\n";
-    string выражение2 = "10 2 8 * + 3 -";
-    cout << "ОПН: " << выражение2 << "\n";
+    string exp2 = "10 2 8 * + 3 -";
+    cout << "ОПН: " << exp2 << "\n";
     cout << "Что означает: 10 + (2 × 8) − 3\n\n";
 
     cout << "Решение:\n";
@@ -49,8 +49,8 @@ void praktika() {
 
     // Третья практика
     cout << " Пример 3\n";
-    string выражение3 = "4 2 5 * + 1 3 2 * + /";
-    cout << "ОПН: " << выражение3 << "\n";
+    string exp3 = "4 2 5 * + 1 3 2 * + /";
+    cout << "ОПН: " << exp3 << "\n";
     cout << "Что означает: (4 + (2 × 5)) / (1 + (3 × 2))\n\n";
 
     cout << "Решение:\n";
@@ -97,15 +97,6 @@ int search(int totalPages) {// это для того чтоб искать ст
     }
     return number - 1; // Потому что индексация с нуля
 }
-//относится к #include <windows.h>
-int center() {//Без этой функции текст всегда будет начинаться с самого верха а с ней  аккуратно по центру
-    CONSOLE_SCREEN_BUFFER_INFO csbi;
-    int rows = 25; // дефолт как будто
-    if (GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi)) {
-        rows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
-    }
-    return rows;
-}
 void Test() {
     vector<string> expressions = { "3 4 +", "5 1 2 + 4 * + 3 -", "7 2 3 * -" };
     int score = 0;
@@ -137,7 +128,9 @@ void Test() {
 
 
 int main() {
-    setlocale(LC_ALL, "Ru");
+    SetConsoleOutputCP(65001);
+    SetConsoleCP(65001);
+    //setlocale(LC_ALL, "Ru");
     ifstream file("teory.txt");
     string line;
 
@@ -166,11 +159,6 @@ int main() {
     int pageIndex = 0;
     while (pageIndex < pages.size()) {
         system("cls");
-        int consoleHeight = center();
-        int contentHeight = pages[pageIndex].size() + 5; // +5  для заголовка и опускания
-        int topPadding = (consoleHeight - contentHeight) / 2;
-
-        cout << string(topPadding, '\n'); // ставим вертикально
 
         cout << "Страница " << (pageIndex + 1) << " из " << pages.size() << ":\n\n";
         for (const string& l : pages[pageIndex]) {
@@ -194,10 +182,8 @@ int main() {
                     system("cls");
                     cout << "\nЭто была практика по ОПН. Нажмите любую клавишу, чтобы продолжить...";
                     _getch();
-
                     cout << "\nТеперь попробуем пройти небольшой тест!\n";
                     _getch();
-
                     Test();
                     break;
                 }
@@ -230,4 +216,4 @@ int main() {
     system("pause > NULL");
     return 0;
 }
-//ваня ничего не сделал
+
