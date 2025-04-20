@@ -5,66 +5,73 @@
 #include <vector>//для хранения строк по страницам 
 #include <windows.h> // чоб сделать консоль красивой
 #include <sstream> //для ОПН
+#include "teory.h"
+#include "practika.h"
+
 
 using namespace std;
 
 //практика
-void praktika() {
-    system("cls");
-    cout << "Практика по обратной польской нотации\n\n";
-
-    // Первая практика
-    cout << "Пример 1\n";
-    string exp1 = "8 5 - 2 3 + *";
-    cout << "ОПН: " << exp1 << "\n";
-    cout << "Что означает: (8 − 5) × (2 + 3)\n\n";
-
-    cout << "Решение:\n";
-    cout << "1. 8 − 5 = 3\n";
-    cout << "2. 2 + 3 = 5\n";
-    cout << "3. 3 × 5 = 15\n";
-    cout << "Ответ: 15\n";
-
-    cout << "\nНажмите любую клавишу для следующего примера...\n";
-    _getch();
-
-    system("cls");
-
-    // Вторая практика
-    cout << "Пример 2\n";
-    string exp2 = "10 2 8 * + 3 -";
-    cout << "ОПН: " << exp2 << "\n";
-    cout << "Что означает: 10 + (2 × 8) − 3\n\n";
-
-    cout << "Решение:\n";
-    cout << "1. 2 × 8 = 16\n";
-    cout << "2. 10 + 16 = 26\n";
-    cout << "3. 26 − 3 = 23\n";
-    cout << "Ответ: 23\n";
-
-    cout << "\nПрактика завершена. Нажмите любую клавишу...\n";
-    _getch();
-
-    system("cls");
-
-    // Третья практика
-    cout << " Пример 3\n";
-    string exp3 = "4 2 5 * + 1 3 2 * + /";
-    cout << "ОПН: " << exp3 << "\n";
-    cout << "Что означает: (4 + (2 × 5)) / (1 + (3 × 2))\n\n";
-
-    cout << "Решение:\n";
-    cout << "1. 2 × 5 = 10\n";
-    cout << "2. 4 + 10 = 14\n";
-    cout << "3. 3 × 2 = 6\n";
-    cout << "4. 1 + 6 = 7\n";
-    cout << "5. 14 / 7 = 2\n";
-    cout << "Ответ: 2\n";
-
-    cout << "\nПрактика завершена.поздравляем\n";
-    _getch();
-
-}
+//void praktika() {
+//
+//    SetConsoleOutputCP(1251);
+//    SetConsoleCP(1251);
+//
+//    system("cls");
+//    cout << "Практика по обратной польской нотации\n\n";
+//
+//    // Первая практика
+//    cout << "Пример 1\n";
+//    string exp1 = "8 5 - 2 3 + *";
+//    cout << "ОПН: " << exp1 << "\n";
+//    cout << "Что означает: (8 − 5) × (2 + 3)\n\n";
+//
+//    cout << "Решение:\n";
+//    cout << "1. 8 − 5 = 3\n";
+//    cout << "2. 2 + 3 = 5\n";
+//    cout << "3. 3 × 5 = 15\n";
+//    cout << "Ответ: 15\n";
+//
+//    cout << "\nНажмите любую клавишу для следующего примера...\n";
+//    _getch();
+//
+//    system("cls");
+//
+//    // Вторая практика
+//    cout << "Пример 2\n";
+//    string exp2 = "10 2 8 * + 3 -";
+//    cout << "ОПН: " << exp2 << "\n";
+//    cout << "Что означает: 10 + (2 × 8) − 3\n\n";
+//
+//    cout << "Решение:\n";
+//    cout << "1. 2 × 8 = 16\n";
+//    cout << "2. 10 + 16 = 26\n";
+//    cout << "3. 26 − 3 = 23\n";
+//    cout << "Ответ: 23\n";
+//
+//    cout << "\nПрактика завершена. Нажмите любую клавишу...\n";
+//    _getch();
+//
+//    system("cls");
+//
+//    // Третья практика
+//    cout << " Пример 3\n";
+//    string exp3 = "4 2 5 * + 1 3 2 * + /";
+//    cout << "ОПН: " << exp3 << "\n";
+//    cout << "Что означает: (4 + (2 × 5)) / (1 + (3 × 2))\n\n";
+//
+//    cout << "Решение:\n";
+//    cout << "1. 2 × 5 = 10\n";
+//    cout << "2. 4 + 10 = 14\n";
+//    cout << "3. 3 × 2 = 6\n";
+//    cout << "4. 1 + 6 = 7\n";
+//    cout << "5. 14 / 7 = 2\n";
+//    cout << "Ответ: 2\n";
+//
+//    cout << "\nПрактика завершена.поздравляем\n";
+//    _getch();
+//
+//}
 
 int OPN(string expr) {
     vector<int> stack;
@@ -98,6 +105,10 @@ int search(int totalPages) {// это для того чтоб искать ст
     return number - 1; // Потому что индексация с нуля
 }
 void Test() {
+
+    SetConsoleOutputCP(1251);
+    SetConsoleCP(1251);
+
     vector<string> expressions = { "3 4 +", "5 1 2 + 4 * + 3 -", "7 2 3 * -" };
     int score = 0;
 
@@ -128,87 +139,47 @@ void Test() {
 
 
 int main() {
-    SetConsoleOutputCP(65001);
-    SetConsoleCP(65001);
+    SetConsoleOutputCP(1251);
+    SetConsoleCP(1251);
     //setlocale(LC_ALL, "Ru");
-    ifstream file("teory.txt");
-    string line;
 
-    if (!file.is_open()) {
-        cerr << "Не удалось открыть файл!" << endl;
-        return 0;
-    }
-
-    vector<vector<string>> pages;
-    vector<string> currentPage;
-
-    while (getline(file, line)) {
-        if (line == "#PAGE_END") {
-            pages.push_back(currentPage);
-            currentPage.clear();
-        }
-        else {
-            currentPage.push_back(line);
-        }
-    }
-
-    file.close();
-
-
-
+    std::vector<std::vector<std::string>> pages;
     int pageIndex = 0;
-    while (pageIndex < pages.size()) {
-        system("cls");
 
-        cout << "Страница " << (pageIndex + 1) << " из " << pages.size() << ":\n\n";
-        for (const string& l : pages[pageIndex]) {
-            cout << l << endl;
-        }
+    // Загружаем теорию в память
+    loadTheory(pages);  // Функция для загрузки страниц теории
 
-        cout << "\n--- Конец страницы ---\n";
-        cout << "Нажмите стрелку вправо для следующей, влево — для предыдущей, G или g для выбора страницы. Любая другая — выход.\n";
+    while (true) {
+        // Отображаем текущую страницу теории
+        showTheory(pages, pageIndex);
 
-        int key = _getch();
-        if (key == 224) {
+        int key = _getch();  // Считываем ввод
+
+        if (key == 224) {  // Если нажата стрелка
             int arrow = _getch();
-            if (arrow == 77) { // вправо
+            if (arrow == 77) {  // вправо
                 if (pageIndex < pages.size() - 1) {
                     pageIndex++;
                 }
                 else {
-                    cout << "\nВы просмотрели все страницы. Перейдём к практике!\n";
-                    _getch();
-                    praktika();
+                    std::cout << "\nВы просмотрели все страницы. Перейдём к практике!\n";
+                    //praktika();  // Переход к практике
                     system("cls");
-                    cout << "\nЭто была практика по ОПН. Нажмите любую клавишу, чтобы продолжить...";
-                    _getch();
-                    cout << "\nТеперь попробуем пройти небольшой тест!\n";
-                    _getch();
-                    Test();
+                    Test();  // Переход к тесту
                     break;
                 }
             }
-            else if (arrow == 75) { // влево
+            else if (arrow == 75) {  // влево
                 if (pageIndex > 0) {
                     pageIndex--;
                 }
-                else {
-                    cout << "\nЭто первая страница.\n";
-                    _getch();
-                }
-            }
-            else {
-                cout << "\nНажата не та стрелка. Завершаем.\n";
-                break;
             }
         }
-        else if (key == 'g' || key == 'G') {
-            cout << "\nПереход к странице:\n";
-            int newIndex = search(pages.size()); //  номер страницы
-            pageIndex = newIndex; // Переход на указанную страницу
+        else if (key == 'g' || key == 'G') {  // Переход к странице
+            pageIndex = selectPage(pages.size());
         }
-        else {
-            cout << "\nНажата не стрелка. Завершаем.\n";
+        else {  // Выход из программы
+            std::cout << "\nЗавершаем программу.\n";
             break;
         }
     }
@@ -216,4 +187,3 @@ int main() {
     system("pause > NULL");
     return 0;
 }
-

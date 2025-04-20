@@ -129,6 +129,10 @@
   <ItemGroup>
     <ClCompile Include="OPN.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="practika.h" />
+    <ClInclude Include="teory.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
