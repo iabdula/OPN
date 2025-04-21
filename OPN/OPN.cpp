@@ -11,67 +11,7 @@
 
 using namespace std;
 
-//практика
-//void praktika() {
-//
-//    SetConsoleOutputCP(1251);
-//    SetConsoleCP(1251);
-//
-//    system("cls");
-//    cout << "Практика по обратной польской нотации\n\n";
-//
-//    // Первая практика
-//    cout << "Пример 1\n";
-//    string exp1 = "8 5 - 2 3 + *";
-//    cout << "ОПН: " << exp1 << "\n";
-//    cout << "Что означает: (8 − 5) × (2 + 3)\n\n";
-//
-//    cout << "Решение:\n";
-//    cout << "1. 8 − 5 = 3\n";
-//    cout << "2. 2 + 3 = 5\n";
-//    cout << "3. 3 × 5 = 15\n";
-//    cout << "Ответ: 15\n";
-//
-//    cout << "\nНажмите любую клавишу для следующего примера...\n";
-//    _getch();
-//
-//    system("cls");
-//
-//    // Вторая практика
-//    cout << "Пример 2\n";
-//    string exp2 = "10 2 8 * + 3 -";
-//    cout << "ОПН: " << exp2 << "\n";
-//    cout << "Что означает: 10 + (2 × 8) − 3\n\n";
-//
-//    cout << "Решение:\n";
-//    cout << "1. 2 × 8 = 16\n";
-//    cout << "2. 10 + 16 = 26\n";
-//    cout << "3. 26 − 3 = 23\n";
-//    cout << "Ответ: 23\n";
-//
-//    cout << "\nПрактика завершена. Нажмите любую клавишу...\n";
-//    _getch();
-//
-//    system("cls");
-//
-//    // Третья практика
-//    cout << " Пример 3\n";
-//    string exp3 = "4 2 5 * + 1 3 2 * + /";
-//    cout << "ОПН: " << exp3 << "\n";
-//    cout << "Что означает: (4 + (2 × 5)) / (1 + (3 × 2))\n\n";
-//
-//    cout << "Решение:\n";
-//    cout << "1. 2 × 5 = 10\n";
-//    cout << "2. 4 + 10 = 14\n";
-//    cout << "3. 3 × 2 = 6\n";
-//    cout << "4. 1 + 6 = 7\n";
-//    cout << "5. 14 / 7 = 2\n";
-//    cout << "Ответ: 2\n";
-//
-//    cout << "\nПрактика завершена.поздравляем\n";
-//    _getch();
-//
-//}
+
 
 int OPN(string expr) {
     vector<int> stack;
@@ -143,15 +83,22 @@ int main() {
     SetConsoleCP(1251);
     //setlocale(LC_ALL, "Ru");
 
-    std::vector<std::vector<std::string>> pages;
+    vector<vector<string>> pages;
+    vector<string> steps;
+    string code;
+
     int pageIndex = 0;
+    int index = 0;
+
 
     // Загружаем теорию в память
-    loadTheory(pages);  // Функция для загрузки страниц теории
+    loadTheory(pages);
+    loadPractice(code, steps);
 
     while (true) {
         // Отображаем текущую страницу теории
         showTheory(pages, pageIndex);
+        praktika(index,steps);
 
         int key = _getch();  // Считываем ввод
 
@@ -161,11 +108,10 @@ int main() {
                 if (pageIndex < pages.size() - 1) {
                     pageIndex++;
                 }
+                else if (index < steps.size() - 1) {
+                    index++;
+                }
                 else {
-                    std::cout << "\nВы просмотрели все страницы. Перейдём к практике!\n";
-                    //praktika();  // Переход к практике
-                    system("cls");
-                    Test();  // Переход к тесту
                     break;
                 }
             }
@@ -173,13 +119,16 @@ int main() {
                 if (pageIndex > 0) {
                     pageIndex--;
                 }
+                else if (index > 0) {
+                    index--;
+                }
             }
         }
         else if (key == 'g' || key == 'G') {  // Переход к странице
             pageIndex = selectPage(pages.size());
         }
         else {  // Выход из программы
-            std::cout << "\nЗавершаем программу.\n";
+            cout << "\nЗавершаем программу.\n";
             break;
         }
     }
