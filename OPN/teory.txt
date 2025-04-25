@@ -80,7 +80,7 @@ abc*+de*f+g*+
 #PAGE_END
 #PRAKTIKA_BEGIN
 
-#CODE_BEGIN
+#CODE
 int OPN(string expr) {
     vector<int> stack;
     stringstream ss(expr);
@@ -100,7 +100,7 @@ int OPN(string expr) {
     }
     return stack.back();
 }
-#CODE_END
+#CODE
 
 #STEP
 Входная строка разбивается на части: числа и операторы.

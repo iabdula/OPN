@@ -1,7 +1,4 @@
-﻿#include <string>
-#include <vector>
-
-using namespace std;
+﻿using namespace std;
 
 void loadPractice(string& codeBlock, vector<string>& steps) {
     ifstream file("teory.txt");
@@ -45,6 +42,3 @@ void praktika(int index, const vector<string>& steps) {
     cout << steps[index] << "\n\n";
     cout << "Стрелка влево/вправо — листать шаги. Любая другая клавиша — выйти.\n";
 }
-
-
-
