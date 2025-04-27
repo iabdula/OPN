@@ -38,7 +38,7 @@
     void showPractikaStep(int index) {
         system("cls");
         cout << "Шаг " << (index + 1) << " из " << steps.size() << ":\n\n";
-        cout << steps[index].first << endl;
-        cout << "// " << steps[index].second << endl;
+        printLineWithHighlight(steps[index].first);  // Подсвечиваем код
+        cout << endl;
+        cout << steps[index].second << endl;  // Пояснение без подсветки
     }
-

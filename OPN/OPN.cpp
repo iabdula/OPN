@@ -1,86 +1,22 @@
-#include <iostream>// Р±Р°Р·Р°
-#include <fstream>//СЂР°Р±РѕС‚Р°С‚СЊ СЃ С„Р°Р№Р»Р°РјРё ifstream
-#include <conio.h>//РґР»СЏ СЃС‚СЂРµР»РѕС‡РµРє РїРµСЂРµРєР»СЋС‡РµРЅРёСЏ (_getch)
-#include <string>//РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ С‚РµРєСЃС‚РѕРІС‹РјРё СЃС‚СЂРѕРєР°РјРё (РїРѕРґРґРµСЂР¶РєР° РєР»Р°СЃСЃР° string)
-#include <vector>//РґР»СЏ С…СЂР°РЅРµРЅРёСЏ СЃС‚СЂРѕРє РїРѕ СЃС‚СЂР°РЅРёС†Р°Рј 
-#include <windows.h> // С‡РѕР± СЃРґРµР»Р°С‚СЊ РєРѕРЅСЃРѕР»СЊ РєСЂР°СЃРёРІРѕР№
-#include <sstream> //РґР»СЏ РћРџРќ
+#include <iostream>// база
+#include <fstream>//работать с файлами ifstream
+#include <conio.h>//для стрелочек переключения (_getch)
+#include <string>//для работы с текстовыми строками (поддержка класса string)
+#include <vector>//для хранения строк по страницам 
+#include <windows.h> // чоб сделать консоль красивой
+#include <sstream> //для ОПН
 #include "teory.h"
 #include "practika.h"
+#include "test.h"
+
 
 
 using namespace std;
 
 
-
-//int OPN(string expr) {
-//    vector<int> stack;
-//    stringstream ss(expr);
-//    string token;
-//
-//    while (ss >> token) {
-//        if (token == "+" || token == "-" || token == "*" || token == "/") {
-//            int b = stack.back(); stack.pop_back();
-//            int a = stack.back(); stack.pop_back();
-//            if (token == "+") stack.push_back(a + b);
-//            if (token == "-") stack.push_back(a - b);
-//            if (token == "*") stack.push_back(a * b);
-//            if (token == "/") stack.push_back(a / b);
-//        }
-//        else {
-//            stack.push_back(stoi(token));  // РґРѕР±Р°РІР»СЏРµРј С‡РёСЃР»Рѕ РІ СЃС‚РµРє
-//        }
-//    }
-//    return stack.back(); // СЂРµР·СѓР»СЊС‚Р°С‚ РІ РїРѕСЃР»РµРґРЅРµРј СЌР»РµРјРµРЅС‚Рµ СЃС‚РµРєР°
-//}
-//
-//int search(int totalPages) {// СЌС‚Рѕ РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР± РёСЃРєР°С‚СЊ СЃС‚СЂР°РЅРёС†Сѓ СЃ РїРѕРјРѕС‰СЊСЋ g G
-//    int number;
-//    cout << "\nР’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ СЃС‚СЂР°РЅРёС†С‹ (1 - " << totalPages << "): ";
-//    while (!(cin >> number) || number < 1 || number > totalPages) {
-//        cin.clear();
-//        cin.ignore(1000, '\n');
-//        cout << "РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ РІРІРѕРґ. РџРѕРІС‚РѕСЂРёС‚Рµ: ";
-//    }
-//    return number - 1; // РџРѕС‚РѕРјСѓ С‡С‚Рѕ РёРЅРґРµРєСЃР°С†РёСЏ СЃ РЅСѓР»СЏ
-//}
-//void Test() {
-//
-//    SetConsoleOutputCP(1251);
-//    SetConsoleCP(1251);
-//
-//    vector<string> expressions = { "3 4 +", "5 1 2 + 4 * + 3 -", "7 2 3 * -" };
-//    int score = 0;
-//
-//    for (int i = 0; i < expressions.size(); i++) {
-//        system("cls");
-//        cout << "Р’РІРµРґРёС‚Рµ СЂРµР·СѓР»СЊС‚Р°С‚ РІС‹СЂР°Р¶РµРЅРёСЏ: " << expressions[i] << endl;
-//        int userAnswer;
-//        cin >> userAnswer;
-//        int correctAnswer = OPN(expressions[i]);
-//
-//        if (userAnswer == correctAnswer) {
-//            cout << "Р’РµСЂРЅРѕ!" << endl;
-//            score++;
-//        }
-//        else {
-//            cout << "РќРµРІРµСЂРЅРѕ! РџСЂР°РІРёР»СЊРЅС‹Р№ РѕС‚РІРµС‚: " << correctAnswer << endl;
-//        }
-//        cout << "РќР°Р¶РјРёС‚Рµ Р»СЋР±СѓСЋ РєР»Р°РІРёС€Сѓ РґР»СЏ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ...\n";
-//        _getch();
-//    }
-//
-//    cout << "\nР’С‹ РЅР°Р±СЂР°Р»Рё " << score << " РёР· " << expressions.size() << endl;
-//    cout << "РљРѕРЅРµС† С‚РµСЃС‚Р°.РџСЂРёРјРёС‚Рµ РїРѕР·РґСЂР°РІР»РµРЅРёСЏ РѕС‚ РђР±РґСѓР»С‹ Рё РђР»Рё" << endl;
-//    _getch();
-//}
-
-
-
-
 int main() {
-    SetConsoleOutputCP(CP_UTF8);
-    SetConsoleCP(CP_UTF8);
+    SetConsoleOutputCP(1251);
+    SetConsoleCP(1251);
     vector<vector<string>> pages;
     loadTheory(pages);
 
@@ -91,21 +27,21 @@ int main() {
         showTheory(pages, pageIndex);
 
         int key = _getch();
-        if (key == 224) { // СЃРїРµС†РёР°Р»СЊРЅР°СЏ РєР»Р°РІРёС€Р°
+        if (key == 224) { // специальная клавиша
             int arrow = _getch();
-            if (arrow == 77) { // СЃС‚СЂРµР»РєР° РІРїСЂР°РІРѕ
+            if (arrow == 77) { // стрелка вправо
                 if (pageIndex < pages.size() - 1) {
                     pageIndex++;
                 }
                 else {
-                    // РўРµРѕСЂРёСЏ Р·Р°РєРѕРЅС‡РёР»Р°СЃСЊ вЂ” РїРµСЂРµС…РѕРґ Рє РїСЂР°РєС‚РёРєРµ
+                    // Теория закончилась — переход к практике
                     system("cls");
-                    cout << "РўРµРѕСЂРёСЏ РѕРєРѕРЅС‡РµРЅР°. РџРµСЂРµС…РѕРґ Рє РїСЂР°РєС‚РёРєРµ..." << endl;
-                    _getch(); // РћР¶РёРґР°РЅРёРµ РЅР°Р¶Р°С‚РёСЏ Р»СЋР±РѕР№ РєР»Р°РІРёС€Рё
+                    cout << "Теория окончена.Переход к практике..." << endl;
+                    _getch(); // Ожидание нажатия любой клавиши
                     inTheory = false;
                 }
             }
-            else if (arrow == 75 && pageIndex > 0) { // СЃС‚СЂРµР»РєР° РІР»РµРІРѕ
+            else if (arrow == 75 && pageIndex > 0) { // стрелка влево
                 pageIndex--;
             }
         }
@@ -113,27 +49,27 @@ int main() {
             pageIndex = selectPage(pages.size());
         }
         else {
-            // Р›СЋР±Р°СЏ РґСЂСѓРіР°СЏ РєР»Р°РІРёС€Р° вЂ” РІС‹С…РѕРґ
+            // Любая другая клавиша — выход
             inTheory = false;
         }
     }
 
-    // РџР РђРљРўРРљРђ
+    // ПРАКТИКА
     int index = 0;
     bool running = true;
 
     while (running) {
         showPractikaStep(index);
 
-        cout << "\nРќР°Р¶РјРёС‚Рµ СЃС‚СЂРµР»РєСѓ РІР»РµРІРѕ РґР»СЏ РІРѕР·РІСЂР°С‚Р° РЅР°Р·Р°Рґ. Р›СЋР±Р°СЏ РґСЂСѓРіР°СЏ РєР»Р°РІРёС€Р° вЂ” РїСЂРѕРґРѕР»Р¶РёС‚СЊ РґР°Р»СЊС€Рµ.\n";
+        cout << "\nНажмите стрелку влево для возврата назад. Любая другая клавиша — продолжить дальше.\n";
 
         int key = _getch();
         if (key == 224) {
             int arrow = _getch();
-            if (arrow == 75 && index > 0) { // СЃС‚СЂРµР»РєР° РІР»РµРІРѕ
+            if (arrow == 75 && index > 0) { // стрелка влево
                 index--;
             }
-            else if (arrow == 77) { // СЃС‚СЂРµР»РєР° РІРїСЂР°РІРѕ
+            else if (arrow == 77) { // стрелка вправо
                 if (index < steps.size() - 1) index++;
                 else running = false;
             }
@@ -146,6 +82,16 @@ int main() {
         }
     }
 
-    cout << "\nРџСЂР°РєС‚РёРєР° Р·Р°РІРµСЂС€РµРЅР°!" << endl;
+    cout << "\nПрактика завершена!" << endl;
+    // --- ТЕСТЫ ---
+    vector<Test> tests;
+    loadTests("teory.txt", tests);
+    if (!tests.empty()) {
+        runTests(tests);
+    }
+    else {
+        cout << "\nТесты не найдены!" << endl;
+        _getch();
+    }
     return 0;
 }

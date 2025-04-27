@@ -26,5 +26,8 @@
     <ClInclude Include="practika.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="test.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
