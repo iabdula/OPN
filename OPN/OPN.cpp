@@ -79,68 +79,73 @@ using namespace std;
 
 
 int main() {
-    SetConsoleOutputCP(1251);
-    SetConsoleCP(1251);
-    //setlocale(LC_ALL, "Ru");
-
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
     vector<vector<string>> pages;
-    string codeBlock;  // Строка для кода
-    vector<string> steps;  // Вектор для шагов
-
-    int pageIndex = 0;
-    int index = 0;
-
-    bool run = true;
-
-
-    // Загружаем теорию в память
     loadTheory(pages);
 
-    loadPractice(codeBlock, steps);
+    int pageIndex = 0;
+    bool inTheory = true;
 
-    if (!steps.empty()) {
-        praktika(index, steps);
-    }
-
-    while (run == true) {
-        // Отображаем текущую страницу теории
+    while (inTheory) {
         showTheory(pages, pageIndex);
-        praktika(index, steps);
 
-        int key = _getch();  // Считываем ввод
-
-        if (key == 224) {  // Если нажата стрелка
+        int key = _getch();
+        if (key == 224) { // специальная клавиша
             int arrow = _getch();
-            if (arrow == 77) {  // вправо
+            if (arrow == 77) { // стрелка вправо
                 if (pageIndex < pages.size() - 1) {
                     pageIndex++;
                 }
-                else if (index < steps.size() - 1) {
-                    index++;
-                }
                 else {
-                    break;
+                    // Теория закончилась — переход к практике
+                    system("cls");
+                    cout << "Теория окончена. Переход к практике..." << endl;
+                    _getch(); // Ожидание нажатия любой клавиши
+                    inTheory = false;
                 }
             }
-            else if (arrow == 75) {  // влево
-                if (pageIndex > 0) {
-                    pageIndex--;
-                }
-                else if (index > 0) {
-                    index--;
-                }
+            else if (arrow == 75 && pageIndex > 0) { // стрелка влево
+                pageIndex--;
             }
         }
-        else if (key == 'g' || key == 'G') {  // Переход к странице
+        else if (key == 'g' || key == 'G') {
             pageIndex = selectPage(pages.size());
         }
-        else {  // Выход из программы
-            cout << "\nЗавершаем программу.\n";
-            run = false;
-            break;
+        else {
+            // Любая другая клавиша — выход
+            inTheory = false;
         }
     }
 
-    system("pause > NULL");
+    // ПРАКТИКА
+    int index = 0;
+    bool running = true;
+
+    while (running) {
+        showPractikaStep(index);
+
+        cout << "\nНажмите стрелку влево для возврата назад. Любая другая клавиша — продолжить дальше.\n";
+
+        int key = _getch();
+        if (key == 224) {
+            int arrow = _getch();
+            if (arrow == 75 && index > 0) { // стрелка влево
+                index--;
+            }
+            else if (arrow == 77) { // стрелка вправо
+                if (index < steps.size() - 1) index++;
+                else running = false;
+            }
+        }
+        else {
+            index++;
+            if (index >= steps.size()) {
+                running = false;
+            }
+        }
+    }
+
+    cout << "\nПрактика завершена!" << endl;
     return 0;
 }
