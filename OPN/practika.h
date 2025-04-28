@@ -36,9 +36,23 @@
 
     // Функция для отображения одного шага
     void showPractikaStep(int index) {
-        system("cls");
-        cout << "Шаг " << (index + 1) << " из " << steps.size() << ":\n\n";
-        printLineWithHighlight(steps[index].first);  // Подсвечиваем код
-        cout << endl;
-        cout << steps[index].second << endl;  // Пояснение без подсветки
+        system("cls"); // Очищаем экран перед выводом нового шага
+        cout << "Шаг " << (index + 1) << " из " << steps.size() << ":\n\n"; // Номер текущего шага
+
+        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+        // Выводим весь код целиком
+        for (int i = 0; i < steps.size(); ++i) {
+            if (i == index) {
+                SetConsoleTextAttribute(hConsole, 12); // Красный цвет
+                cout << steps[i].first << endl;
+                SetConsoleTextAttribute(hConsole, 7);  // Обычный цвет
+            }
+            else {
+                cout << steps[i].first << endl;
+            }
+        }
+
+        cout << "\nПояснение:\n";
+        cout << steps[index].second << endl; // Выводим пояснение к выделенной строке
     }

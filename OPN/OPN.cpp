@@ -39,6 +39,8 @@ int main() {
                     cout << "Теория окончена.Переход к практике..." << endl;
                     _getch(); // Ожидание нажатия любой клавиши
                     inTheory = false;
+
+                    
                 }
             }
             else if (arrow == 75 && pageIndex > 0) { // стрелка влево
@@ -82,10 +84,15 @@ int main() {
         }
     }
 
-    cout << "\nПрактика завершена!" << endl;
+    system("cls");
+    cout << "\nПрактика завершена! Переходим к тестам..." << endl;
+    cout << "Нажмите любую клавишу для продолжения" << endl;
+    _getch();
+
     // --- ТЕСТЫ ---
     vector<Test> tests;
-    loadTests("teory.txt", tests);
+    loadTheory(pages);
+    loadTests("tests.txt", tests);
     if (!tests.empty()) {
         runTests(tests);
     }
